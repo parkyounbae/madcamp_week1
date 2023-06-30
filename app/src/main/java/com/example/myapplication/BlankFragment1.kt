@@ -60,14 +60,6 @@ class BlankFragment1 : Fragment() {
 
     fun getContact() : MutableList<ContactData> {
         var contactList = mutableListOf<ContactData>()
-//        for (i in 1..100) {
-//            val name = "${i}번째"
-//            val number = "010-${i}"
-//            val tempContact = ContactData(name, number)
-//            contactList.add(tempContact)
-//        }
-//
-//        return contactList
 
         try {
             val json = requireContext().assets.open("contact.json").bufferedReader(Charset.defaultCharset()).use {
