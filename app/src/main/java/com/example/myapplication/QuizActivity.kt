@@ -34,6 +34,7 @@ class QuizActivity : AppCompatActivity() {
         submitText = findViewById(R.id.submitText)
         currentResultTextView = findViewById(R.id.currentResult)
         currentResultTextView.text = correctNumber.toString() + "/" + numberOfQuiz.toString()
+        updateImageView()
 
         val submitButton = findViewById<Button>(R.id.submitButton)
         submitButton.setOnClickListener {
@@ -61,7 +62,7 @@ class QuizActivity : AppCompatActivity() {
         Toast.makeText(this, "정답입니다!",Toast.LENGTH_LONG).show()
         currentIndex++
         correctNumber++
-        if(currentIndex + 1 == numberOfQuiz) {
+        if(currentIndex == numberOfQuiz ) {
             endQuiz()
         }
         updateCorrectText()
@@ -71,7 +72,7 @@ class QuizActivity : AppCompatActivity() {
     private fun wrong() {
         Toast.makeText(this, "틀렸습니다. 이분은 " + quizList.get(currentIndex).name + " 님입니다. 사과하세요",Toast.LENGTH_LONG).show()
         currentIndex++
-        if(currentIndex + 1 == numberOfQuiz) {
+        if(currentIndex  == numberOfQuiz) {
             endQuiz()
         }
         updateImageView()

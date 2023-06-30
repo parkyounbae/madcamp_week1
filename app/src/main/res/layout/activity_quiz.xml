@@ -8,43 +8,58 @@
 
     <ImageView
         android:id="@+id/quizImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="137dp"
-        tools:layout_editor_absoluteY="249dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:layout_marginTop="200dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <Button
         android:id="@+id/submitButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
         android:text="Button"
-        tools:layout_editor_absoluteX="269dp"
-        tools:layout_editor_absoluteY="448dp" />
+        app:layout_constraintTop_toBottomOf="@+id/quizImageView"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/submitText"
+        android:layout_marginStart="30dp"
+        />
 
     <EditText
         android:id="@+id/submitText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
         android:ems="10"
         android:inputType="text"
         android:text="Name"
-        tools:layout_editor_absoluteX="40dp"
-        tools:layout_editor_absoluteY="449dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quizImageView"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toStartOf="@+id/submitButton"
+        />
 
     <TextView
         android:id="@+id/currentResult"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="167dp"
-        tools:layout_editor_absoluteY="156dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/quizImageView"
+        />
 
     <Button
         android:id="@+id/giveUpButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:text="Button"
-        tools:layout_editor_absoluteX="164dp"
-        tools:layout_editor_absoluteY="667dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
