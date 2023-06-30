@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/BlankFragment1"
-        android:title="일정"
+        android:title="연락처"
         android:icon="@drawable/baseline_contacts_24"/>
 
     <item
         android:id="@+id/BlankFragment2"
-        android:title="홈"
-        android:icon="@drawable/baseline_fiber_new_24"/>
+        android:title="사진"
+        android:icon="@drawable/baseline_photo_24"/>
 
     <item
         android:id="@+id/BlankFragment3"
-        android:title="마이페이지"
-        android:icon="@drawable/baseline_photo_24"/>
+        android:title="신메뉴"
+        android:icon="@drawable/baseline_fiber_new_24"/>
 
 </menu>
