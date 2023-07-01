@@ -62,8 +62,8 @@ class BlankFragment1 : Fragment() {
                 detailName.text = contact_DataArray.get(position).name
                 detailImage.setImageResource(itemList.get(position).resId)
                 detailNumber.text = contact_DataArray.get(position).number
-                detailEmail.text = "email"
-                detailInstagram.text = "instagram"
+                detailEmail.text = "dbsqo010@hanyang.ac.kr"
+                detailInstagram.text = "@younbae_99"
 
 
                 detailClose.setOnClickListener {
@@ -83,7 +83,7 @@ class BlankFragment1 : Fragment() {
         imgList.add(ImageData("아이유", R.drawable.image1))
         imgList.add(ImageData("안유진", R.drawable.image2))
         imgList.add(ImageData("제니", R.drawable.image3))
-        imgList.add(ImageData("박윤배", R.drawable.image1))
+        imgList.add(ImageData("박윤배", R.drawable.image4))
         imgList.add(ImageData("박성빈", R.drawable.image2))
         imgList.add(ImageData("하이나리", R.drawable.image6))
         imgList.add(ImageData("하이리온", R.drawable.image7))

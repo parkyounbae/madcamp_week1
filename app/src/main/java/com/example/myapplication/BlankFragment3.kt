@@ -91,7 +91,7 @@ class BlankFragment3 : Fragment() {
             imgList.add(ImageData("아이유", R.drawable.image1))
             imgList.add(ImageData("안유진", R.drawable.image2))
             imgList.add(ImageData("제니", R.drawable.image3))
-            imgList.add(ImageData("박윤배", R.drawable.image1))
+            imgList.add(ImageData("박윤배", R.drawable.image4))
             imgList.add(ImageData("박성빈", R.drawable.image2))
             imgList.add(ImageData("하이나리", R.drawable.image6))
             imgList.add(ImageData("하이리온", R.drawable.image7))

@@ -62,7 +62,7 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun correct() {
-        Toast.makeText(this, "정답입니다!",Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "정답입니다!",Toast.LENGTH_SHORT).show()
         currentIndex++
         correctNumber++
         if(currentIndex == numberOfQuiz ) {
@@ -73,7 +73,7 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun wrong() {
-        Toast.makeText(this, "틀렸습니다. 이분은 " + quizList.get(currentIndex).name + " 님입니다. 사과하세요",Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "틀렸습니다. 이분은 " + quizList.get(currentIndex).name + " 님입니다. 사과하세요",Toast.LENGTH_SHORT).show()
         currentIndex++
         if(currentIndex  == numberOfQuiz) {
             endQuiz()
