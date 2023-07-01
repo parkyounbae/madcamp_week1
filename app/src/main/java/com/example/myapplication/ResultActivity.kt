@@ -16,6 +16,14 @@ import androidx.compose.material3.Text
 import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.myapplication.databinding.ActivityResultBinding
 import com.example.myapplication.databinding.FragmentBlank3Binding
+import nl.dionsegijn.konfetti.core.Angle
+import nl.dionsegijn.konfetti.core.Party
+import nl.dionsegijn.konfetti.core.Position
+import nl.dionsegijn.konfetti.core.Rotation
+import nl.dionsegijn.konfetti.core.emitter.Emitter
+import nl.dionsegijn.konfetti.core.models.Size
+import nl.dionsegijn.konfetti.xml.KonfettiView
+import java.util.concurrent.TimeUnit
 
 class ResultActivity : AppCompatActivity() {
     val binding by lazy { ActivityResultBinding.inflate(layoutInflater)}
@@ -24,6 +32,8 @@ class ResultActivity : AppCompatActivity() {
     private var numberOfQuiz = 0
     private lateinit var ResultTextView: TextView
     private lateinit var MessageText: TextView
+    private lateinit var viewKonfetti: KonfettiView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +45,7 @@ class ResultActivity : AppCompatActivity() {
         ResultTextView = findViewById(R.id.result)
         MessageText = findViewById(R.id.message)
         ResultTextView.text = correctNumber.toString() + " / " + numberOfQuiz.toString()
+        viewKonfetti = findViewById<KonfettiView>(R.id.konfettiView)
 
         showResultMessage(correctNumber, numberOfQuiz)
 
@@ -60,6 +71,20 @@ class ResultActivity : AppCompatActivity() {
         } else {
             MessageText.text = "분발하세요! 더 많은 노력이 필요합니다."
         }
+        val party = Party(
+            speed = 30f,
+            maxSpeed = 50f,
+            damping = 0.9f,
+            angle = Angle.TOP,
+            spread = 45,
+            size = listOf(Size.SMALL, Size.LARGE),
+            timeToLive = 3000L,
+            rotation = Rotation(),
+            colors = listOf(0xfce18a, 0xff726d, 0xf4306d, 0xb48def),
+            emitter = Emitter(duration = 100, TimeUnit.MILLISECONDS).max(30),
+            position = Position.Relative(0.5, 1.0)
+        )
+        viewKonfetti.start(party)
     }
 
 
