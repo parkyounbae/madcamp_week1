@@ -1,14 +1,15 @@
 package com.example.myapplication
 
-import android.content.Context
+import android.app.AlertDialog
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
+import android.widget.AdapterView.OnItemLongClickListener
+import android.widget.Button
 import android.widget.GridView
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 
 
@@ -46,6 +47,22 @@ class BlankFragment2 : Fragment() {
         val gridView: GridView = rootView.findViewById(R.id.gridView)
         val imageAdapter = ImageAdapter(requireContext(), itemList)
         gridView.adapter = imageAdapter
+
+        gridView.setOnItemClickListener { parent, view, position, id ->
+
+            val view = layoutInflater.inflate(R.layout.activity_image_pop_up, null)
+
+            val builder = AlertDialog.Builder(context).setView(view).create()
+//            builder가 팝업되는 화면임
+            val image = view.findViewById<ImageView>(R.id.imagePopup)
+            val button = view.findViewById<Button>(R.id.closeButton)
+            image.setImageResource(itemList.get(position).resId)
+            button.setOnClickListener{
+                builder.dismiss()
+            }
+            builder.show()
+        }
+
 
         return rootView
     }
@@ -96,4 +113,3 @@ class BlankFragment2 : Fragment() {
             }
     }
 }
-
