@@ -11,8 +11,9 @@ import com.example.myapplication.databinding.ContactItemBinding
 
 class ContactAdapter: RecyclerView.Adapter<Holder>() {
     var contactList = mutableListOf<ContactData>()
+    private lateinit var binding: ContactItemBinding
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val binding = ContactItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding = ContactItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return Holder(binding)
     }
 
@@ -23,6 +24,8 @@ class ContactAdapter: RecyclerView.Adapter<Holder>() {
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val contact = contactList.get(position)
         holder.setContact(contact)
+
+
     }
 
 
