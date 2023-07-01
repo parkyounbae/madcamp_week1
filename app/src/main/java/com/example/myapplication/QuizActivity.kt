@@ -40,6 +40,7 @@ class QuizActivity : AppCompatActivity() {
         submitButton.setOnClickListener {
             val inputText = submitText.text.toString()
             checkAnswer(inputText)
+            submitText.setText(null)
         }
 
         val giveUpButton = findViewById<Button>(R.id.giveUpButton)
