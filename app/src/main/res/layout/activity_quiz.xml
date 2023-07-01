@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color1"
     tools:context=".QuizActivity">
 
     <ImageView
@@ -27,7 +28,7 @@
         android:layout_height="50dp"
         android:text="제출하기"
         app:layout_constraintTop_toBottomOf="@+id/quizImageView"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/submitText"
         android:layout_marginStart="10dp"
@@ -47,7 +48,7 @@
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quizImageView"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="30dp"
         app:layout_constraintEnd_toStartOf="@+id/submitButton"
         android:background="@drawable/white_button"
@@ -60,6 +61,9 @@
         android:text="TextView"
         android:gravity="center"
         android:textSize="20pt"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginBottom="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/quizImageView"
@@ -67,12 +71,14 @@
 
     <Button
         android:id="@+id/giveUpButton"
-        android:layout_width="300dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         android:text="포기하기 ㅠㅠ"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
         android:background="@drawable/red_button"
         />
