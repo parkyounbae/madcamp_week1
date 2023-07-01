@@ -88,7 +88,7 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun endQuiz() {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, ResultActivity::class.java)
         intent.putExtra("correct", correctNumber)
         intent.putExtra("number", numberOfQuiz)
         startActivity(intent)
