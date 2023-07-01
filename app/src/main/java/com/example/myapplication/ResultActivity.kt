@@ -51,11 +51,11 @@ class ResultActivity : AppCompatActivity() {
     }
 
     fun showResultMessage(score: Int, total: Int) {
-        if (score >= 0.8 * total) {
+        if (score >= 0.75 * total) {
             MessageText.text = "축하합니다!"
-        } else if (score >= 0.6 * total) {
+        } else if (score >= 0.5 * total) {
             MessageText.text = "잘 하셨습니다! 좋은 성적입니다."
-        } else if (score >= 0.4 * total) {
+        } else if (score >= 0.25 * total) {
             MessageText.text = "노력이 보이는 성적입니다. 계속 열심히 하세요."
         } else {
             MessageText.text = "분발하세요! 더 많은 노력이 필요합니다."
