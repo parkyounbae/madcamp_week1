@@ -1,15 +1,17 @@
 package com.example.myapplication
 
 import android.app.AlertDialog
+import android.app.Dialog
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView.OnItemLongClickListener
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.GridView
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 
 
@@ -52,19 +54,47 @@ class BlankFragment2 : Fragment() {
 
             val view = layoutInflater.inflate(R.layout.activity_image_pop_up, null)
 
+            val title = itemList.get(position).name
+            val customDialog = CustomDialog(requireContext(), title)
+
             val builder = AlertDialog.Builder(context).setView(view).create()
 //            builder가 팝업되는 화면임
-            val image = view.findViewById<ImageView>(R.id.imagePopup)
-            val button = view.findViewById<Button>(R.id.closeButton)
+
+            customDialog.setTitle(itemList.get(position).name)
+
+            val image = customDialog.findViewById<ImageView>(R.id.imagePopup)
             image.setImageResource(itemList.get(position).resId)
+            cropImageToSquare(image)
+//            val parameter = WindowManager.LayoutParams()
+//            parameter.width = WindowManager.LayoutParams.MATCH_PARENT
+//            parameter.height = WindowManager.LayoutParams.MATCH_PARENT
+            val button = customDialog.findViewById<Button>(R.id.closeButton)
             button.setOnClickListener{
-                builder.dismiss()
+                customDialog.dismiss()
             }
-            builder.show()
+            customDialog.show()
+
+
         }
 
 
         return rootView
+    }
+
+    fun cropImageToSquare(imageView: ImageView) {
+        val drawable = imageView.drawable
+        if (drawable is BitmapDrawable) {
+            val bitmap = drawable.bitmap
+            val width = bitmap.width
+            val height = bitmap.height
+
+            val size = if (width > height) height else width
+            val left = (width - size) / 2
+            val top = (height - size) / 2
+
+            val croppedBitmap = Bitmap.createBitmap(bitmap, left, top, size, size)
+            imageView.setImageBitmap(croppedBitmap)
+        }
     }
 
     fun getImage() : ArrayList<ImageData> {
