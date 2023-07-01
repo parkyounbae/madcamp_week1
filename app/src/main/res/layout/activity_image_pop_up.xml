@@ -5,13 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    tools:context=".ImagePopUpActivity">
+    tools:context=".BlankFragment2">
+
+    <TextView
+        android:id="@+id/dialogTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="25sp"
+        android:padding="20dp"
+        android:textColor="@color/color1"
+        android:text="Title" />
 
     <ImageView
         android:id="@+id/imagePopup"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:transitionName="imgTrans" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:transitionName="imgTrans"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialogTitle"/>
 
     <Button
         android:id="@+id/closeButton"
