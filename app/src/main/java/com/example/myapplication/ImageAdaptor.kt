@@ -33,6 +33,8 @@ class ImageAdapter(private var context: Context?, private var imgList: ArrayList
         holder.imageView.setImageResource(itemData.resId)
         cropImageToSquare(holder.imageView)
         holder.textView.text = itemData.name
+        holder.imageView.setBackgroundResource(R.drawable.image_corner)
+        holder.imageView.clipToOutline = true
 
         return view!!
     }

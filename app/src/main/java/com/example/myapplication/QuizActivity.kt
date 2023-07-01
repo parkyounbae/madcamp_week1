@@ -1,6 +1,8 @@
 package com.example.myapplication
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -81,6 +83,25 @@ class QuizActivity : AppCompatActivity() {
 
     private fun updateImageView() {
         imageView.setImageResource(quizList.get(currentIndex).resId)
+        cropImageToSquare(imageView)
+        imageView.setBackgroundResource(R.drawable.image_corner)
+        imageView.clipToOutline = true
+    }
+
+    fun cropImageToSquare(imageView: ImageView) {
+        val drawable = imageView.drawable
+        if (drawable is BitmapDrawable) {
+            val bitmap = drawable.bitmap
+            val width = bitmap.width
+            val height = bitmap.height
+
+            val size = if (width > height) height else width
+            val left = (width - size) / 2
+            val top = (height - size) / 2
+
+            val croppedBitmap = Bitmap.createBitmap(bitmap, left, top, size, size)
+            imageView.setImageBitmap(croppedBitmap)
+        }
     }
 
     private fun updateCorrectText() {
