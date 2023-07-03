@@ -23,6 +23,7 @@ import nl.dionsegijn.konfetti.core.Rotation
 import nl.dionsegijn.konfetti.core.emitter.Emitter
 import nl.dionsegijn.konfetti.core.models.Size
 import nl.dionsegijn.konfetti.xml.KonfettiView
+import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 class ResultActivity : AppCompatActivity() {
@@ -33,6 +34,7 @@ class ResultActivity : AppCompatActivity() {
     private lateinit var ResultTextView: TextView
     private lateinit var MessageText: TextView
     private lateinit var viewKonfetti: KonfettiView
+    private lateinit var TimeTextView: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,12 +44,18 @@ class ResultActivity : AppCompatActivity() {
 
         numberOfQuiz = intent.getSerializableExtra("number") as Int
         correctNumber = intent.getSerializableExtra("correct") as Int
+        val totalTime = intent.getSerializableExtra("timetaken") as Long
         ResultTextView = findViewById(R.id.result)
+        TimeTextView = findViewById(R.id.stopwatch)
         MessageText = findViewById(R.id.message)
         ResultTextView.text = correctNumber.toString() + " / " + numberOfQuiz.toString()
+
         viewKonfetti = findViewById<KonfettiView>(R.id.konfettiView)
 
         showResultMessage(correctNumber, numberOfQuiz)
+
+        val timeText = formatTime(totalTime)
+        TimeTextView.text = "걸린 시간\n\n" + timeText
 
 //        val binding = ActivityResultBinding.inflate(layoutInflater)
 
@@ -85,6 +93,14 @@ class ResultActivity : AppCompatActivity() {
             position = Position.Relative(0.5, 1.0)
         )
         viewKonfetti.start(party)
+    }
+
+    private fun formatTime(timeInMillis: Long): String {
+        val totalSeconds = timeInMillis / 1000
+        val seconds = totalSeconds % 60
+        val minutes = (totalSeconds / 60) % 60
+        val milliseconds = (timeInMillis / 10) % 100
+        return String.format(Locale.getDefault(), "%02d:%02d:%02d", minutes, seconds, milliseconds)
     }
 
 
