@@ -35,13 +35,14 @@
         android:id="@+id/closeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="40dp"
         android:text="OK"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/ok_button"
-        app:layout_constraintTop_toBottomOf="@+id/imagePopup" />
+        app:layout_constraintTop_toBottomOf="@+id/imagePopup"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/ok_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
