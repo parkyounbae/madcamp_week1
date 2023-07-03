@@ -1,9 +1,7 @@
 package com.example.myapplication
 
 import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
-import android.graphics.Point
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
@@ -12,12 +10,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.databinding.FragmentBlank1Binding
 import org.json.JSONArray
@@ -38,12 +36,23 @@ private const val ARG_PARAM2 = "param2"
  */
 class BlankFragment1 : Fragment() {
     val binding by lazy { FragmentBlank1Binding.inflate(layoutInflater) }
-
+    var contact_DataArray = mutableListOf<ContactData>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var contact_DataArray = getContact()
+        val first = MyApplication.prefs.getBoolean("isFirst", false)
+        if (first == false) {
+            Log.d("Is first Time?", "first")
+            MyApplication.prefs.setBoolean("isFirst", true)
+            //앱 최초 실행시 하고 싶은 작업
+            contact_DataArray = getContact()
+            MyApplication.prefs.setContact(contact_DataArray)
+        } else {
+            Log.d("Is first Time?", "not first")
+            contact_DataArray = MyApplication.prefs.getContact()
+        }
+
         var itemList = getImage()
 
         val adapter = ContactAdapter(contact_DataArray)
@@ -92,6 +101,10 @@ class BlankFragment1 : Fragment() {
                 detailInstagram.text = contactData.instagram
 
                 detailClose.setOnClickListener {
+                    contact_DataArray.removeAt(contact_DataArray.indexOf(contactData))
+                    MyApplication.prefs.setContact(contact_DataArray)
+                    adapter.notifyDataSetChanged()
+
                     detailContactDialog.dismiss()
                 }
 

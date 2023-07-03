@@ -12,7 +12,7 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 
-class ImageAdapter(private var context: Context?, private var imgList: ArrayList<ImageData>) : BaseAdapter() {
+class ImageAdapter(private var context: Context?, private var imgList: MutableList<ContactData>) : BaseAdapter() {
 
     @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -30,7 +30,8 @@ class ImageAdapter(private var context: Context?, private var imgList: ArrayList
         }
 
         val itemData = imgList[position]
-        holder.imageView.setImageResource(itemData.resId)
+        val resourceId = context!!.resources.getIdentifier("@drawable/"+imgList.get(position).imageResId, "drawable", "com.example.myapplication")
+        holder.imageView.setImageResource(resourceId)
         cropImageToSquare(holder.imageView)
         holder.textView.text = itemData.name
         holder.imageView.setBackgroundResource(R.drawable.image_corner)

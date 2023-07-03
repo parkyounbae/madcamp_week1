@@ -29,6 +29,8 @@ class BlankFragment2 : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var gridView: GridView
+    private lateinit var imageAdapter: ImageAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,16 +40,27 @@ class BlankFragment2 : Fragment() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        imageAdapter.notifyDataSetChanged()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         // return inflater.inflate(R.layout.fragment_blank2, container, false)
-        var itemList = getImage()
+        // var itemList = getImage()
+
+        var itemList = mutableListOf<ContactData>()
+        itemList = MyApplication.prefs.getContact()
+
         val rootView = inflater.inflate(R.layout.fragment_blank2, container, false)
-        val gridView: GridView = rootView.findViewById(R.id.gridView)
-        val imageAdapter = ImageAdapter(requireContext(), itemList)
+        // val gridView: GridView = rootView.findViewById(R.id.gridView)
+        gridView = rootView.findViewById(R.id.gridView)
+        // val imageAdapter = ImageAdapter(requireContext(), itemList)
+        imageAdapter = ImageAdapter(requireContext(), itemList)
         gridView.adapter = imageAdapter
 
         gridView.setOnItemClickListener { parent, view, position, id ->
@@ -63,7 +76,8 @@ class BlankFragment2 : Fragment() {
             customDialog.setTitle(itemList.get(position).name)
 
             val image = customDialog.findViewById<ImageView>(R.id.imagePopup)
-            image.setImageResource(itemList.get(position).resId)
+            val resourceId = resources.getIdentifier("@drawable/"+itemList.get(position).imageResId, "drawable", "com.example.myapplication")
+            image.setImageResource(resourceId)
             cropImageToSquare(image)
             val button = customDialog.findViewById<Button>(R.id.closeButton)
             button.setOnClickListener{

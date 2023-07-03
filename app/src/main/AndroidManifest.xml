@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_main_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat"
+        android:name=".MyApplication"
         tools:targetApi="31" >
         <activity
             android:name=".ImagePopUpActivity"
