@@ -119,6 +119,19 @@ class BlankFragment1 : Fragment() {
                     startActivity(intent)
                 }
 
+                detailEmail.setOnClickListener {
+                    val emailIntent = Intent(Intent.ACTION_SENDTO)
+                    emailIntent.data = Uri.parse("mailto:${contactData.email}")
+
+                    try {
+                        startActivity(emailIntent)
+                    } catch (e: Exception) {
+                        Toast.makeText(context, "Failed to open email client", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+
+
                 detailContactDialog.show()
             }
         })
