@@ -1,15 +1,14 @@
 package com.example.myapplication
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.Drawable
+import android.graphics.Point
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.Gravity
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,17 +17,14 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.databinding.ContactItemBinding
 import com.example.myapplication.databinding.FragmentBlank1Binding
-import com.google.android.gms.wearable.DataItem
 import org.json.JSONArray
 import org.json.JSONException
 import java.io.IOException
 import java.nio.charset.Charset
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -75,7 +71,7 @@ class BlankFragment1 : Fragment() {
             override fun onClick(v: View, contactData: ContactData) {
                 val view = layoutInflater.inflate(R.layout.contact_dialog, null)
                 val detailContactDialog = AlertDialog.Builder(context, R.style.CustomAlertDialog).setView(view).create()
-                detailContactDialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+
 
                 val detailName = view.findViewById<TextView>(R.id.detailContactName)
                 val detailImage = view.findViewById<ImageView>(R.id.detailContactImageView)
@@ -95,16 +91,11 @@ class BlankFragment1 : Fragment() {
                 detailEmail.text = contactData.email
                 detailInstagram.text = contactData.instagram
 
-                // 다이얼로그의 크기를 조정합니다.
-                val window = detailContactDialog.window
-                val layoutParams = window?.attributes
-                layoutParams?.width = WindowManager.LayoutParams.MATCH_PARENT  // 원하는 너비로 설정
-                layoutParams?.height = WindowManager.LayoutParams.WRAP_CONTENT  // 원하는 높이로 설정
-                window?.attributes = layoutParams
-
                 detailClose.setOnClickListener {
                     detailContactDialog.dismiss()
                 }
+
+
 
                 detailNumber.setOnClickListener {
                     var intent = Intent(Intent.ACTION_DIAL)
@@ -141,6 +132,8 @@ class BlankFragment1 : Fragment() {
 
 
                 detailContactDialog.show()
+                detailContactDialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+
             }
         })
 
