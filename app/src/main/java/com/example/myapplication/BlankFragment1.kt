@@ -119,6 +119,14 @@ class BlankFragment1 : Fragment() {
                     startActivity(intent)
                 }
 
+                detailInstagram.setOnClickListener {
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    val insta = contactData.instagram
+                    val url = "https://www.instagram.com/$insta"
+                    intent.data = Uri.parse(url)
+                    startActivity(intent)
+                }
+
                 detailContactDialog.show()
             }
         })
