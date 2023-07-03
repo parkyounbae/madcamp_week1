@@ -65,9 +65,6 @@ class BlankFragment2 : Fragment() {
             val image = customDialog.findViewById<ImageView>(R.id.imagePopup)
             image.setImageResource(itemList.get(position).resId)
             cropImageToSquare(image)
-//            val parameter = WindowManager.LayoutParams()
-//            parameter.width = WindowManager.LayoutParams.MATCH_PARENT
-//            parameter.height = WindowManager.LayoutParams.MATCH_PARENT
             val button = customDialog.findViewById<Button>(R.id.closeButton)
             button.setOnClickListener{
                 customDialog.dismiss()
