@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.os.Bundle
+import android.provider.ContactsContract.Data
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -18,12 +19,14 @@ private const val TAG_MY_PAGE = "my_page_fragment"
 class NaviActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityNaviBinding
+    private lateinit var dataManager: DataManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNaviBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        dataManager = DataManager()
 
         setFragment(TAG_HOME, BlankFragment1())
 
@@ -35,6 +38,10 @@ class NaviActivity : AppCompatActivity() {
             }
             true
         }
+    }
+
+    fun getDataManager() : DataManager {
+        return dataManager
     }
 
     private fun setFragment(tag: String, fragment: Fragment) {

@@ -37,6 +37,17 @@ private const val ARG_PARAM2 = "param2"
 class BlankFragment1 : Fragment() {
     val binding by lazy { FragmentBlank1Binding.inflate(layoutInflater) }
     var contact_DataArray = mutableListOf<ContactData>()
+    private lateinit var dataManager: DataManager
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        dataManager = (activity as NaviActivity).getDataManager()
+        dataManager.registerObserver(object : DataObserver{
+            override fun onDataChanged() {
+                Log.d("as","as")
+            }
+        })
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,8 +63,6 @@ class BlankFragment1 : Fragment() {
             Log.d("Is first Time?", "not first")
             contact_DataArray = MyApplication.prefs.getContact()
         }
-
-        var itemList = getImage()
 
         val adapter = ContactAdapter(contact_DataArray)
 
@@ -104,7 +113,7 @@ class BlankFragment1 : Fragment() {
                     contact_DataArray.removeAt(contact_DataArray.indexOf(contactData))
                     MyApplication.prefs.setContact(contact_DataArray)
                     adapter.notifyDataSetChanged()
-
+                    dataManager.setData("new")
                     detailContactDialog.dismiss()
                 }
 
@@ -151,32 +160,6 @@ class BlankFragment1 : Fragment() {
         })
 
         return binding.root
-    }
-
-    fun getImage() : ArrayList<ImageData> {
-        var imgList = ArrayList<ImageData>()
-
-        imgList.add(ImageData("아이유", R.drawable.image1))
-        imgList.add(ImageData("안유진", R.drawable.image2))
-        imgList.add(ImageData("제니", R.drawable.image3))
-        imgList.add(ImageData("박윤배", R.drawable.image4))
-        imgList.add(ImageData("박성빈", R.drawable.image2))
-        imgList.add(ImageData("하이나리", R.drawable.image6))
-        imgList.add(ImageData("하이리온", R.drawable.image7))
-        imgList.add(ImageData("넙죽이", R.drawable.image8))
-        imgList.add(ImageData("양파쿵야", R.drawable.image9))
-        imgList.add(ImageData("김태희", R.drawable.image10))
-        imgList.add(ImageData("임지연", R.drawable.image11))
-        imgList.add(ImageData("미연", R.drawable.image12))
-        imgList.add(ImageData("카즈하", R.drawable.image13))
-        imgList.add(ImageData("김채원", R.drawable.image14))
-        imgList.add(ImageData("잔망루피", R.drawable.image15))
-        imgList.add(ImageData("쿼카", R.drawable.image16))
-        imgList.add(ImageData("마동석", R.drawable.image17))
-        imgList.add(ImageData("진", R.drawable.image18))
-        imgList.add(ImageData("짱구", R.drawable.image19))
-        imgList.add(ImageData("춘식이", R.drawable.image20))
-        return imgList
     }
 
     fun getContact() : MutableList<ContactData> {

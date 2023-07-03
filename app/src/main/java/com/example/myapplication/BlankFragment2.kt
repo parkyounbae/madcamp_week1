@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +26,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [BlankFragment2.newInstance] factory method to
  * create an instance of this fragment.
  */
-class BlankFragment2 : Fragment() {
+class BlankFragment2 : Fragment(), DataObserver {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -40,19 +41,10 @@ class BlankFragment2 : Fragment() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        imageAdapter.notifyDataSetChanged()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        // return inflater.inflate(R.layout.fragment_blank2, container, false)
-        // var itemList = getImage()
-
         var itemList = mutableListOf<ContactData>()
         itemList = MyApplication.prefs.getContact()
 
@@ -92,6 +84,12 @@ class BlankFragment2 : Fragment() {
         return rootView
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val dataManager = (activity as NaviActivity).getDataManager()
+        dataManager.registerObserver(this)
+    }
+
     fun cropImageToSquare(imageView: ImageView) {
         val drawable = imageView.drawable
         if (drawable is BitmapDrawable) {
@@ -106,32 +104,6 @@ class BlankFragment2 : Fragment() {
             val croppedBitmap = Bitmap.createBitmap(bitmap, left, top, size, size)
             imageView.setImageBitmap(croppedBitmap)
         }
-    }
-
-    fun getImage() : ArrayList<ImageData> {
-        var imgList = ArrayList<ImageData>()
-
-        imgList.add(ImageData("아이유", R.drawable.image1))
-        imgList.add(ImageData("안유진", R.drawable.image2))
-        imgList.add(ImageData("제니", R.drawable.image3))
-        imgList.add(ImageData("박윤배", R.drawable.image1))
-        imgList.add(ImageData("박성빈", R.drawable.image2))
-        imgList.add(ImageData("하이나리", R.drawable.image6))
-        imgList.add(ImageData("하이리온", R.drawable.image7))
-        imgList.add(ImageData("넙죽이", R.drawable.image8))
-        imgList.add(ImageData("양파쿵야", R.drawable.image9))
-        imgList.add(ImageData("김태희", R.drawable.image10))
-        imgList.add(ImageData("임지연", R.drawable.image11))
-        imgList.add(ImageData("미연", R.drawable.image12))
-        imgList.add(ImageData("카즈하", R.drawable.image13))
-        imgList.add(ImageData("김채원", R.drawable.image14))
-        imgList.add(ImageData("잔망루피", R.drawable.image15))
-        imgList.add(ImageData("쿼카", R.drawable.image16))
-        imgList.add(ImageData("마동석", R.drawable.image17))
-        imgList.add(ImageData("진", R.drawable.image18))
-        imgList.add(ImageData("짱구", R.drawable.image19))
-        imgList.add(ImageData("춘식이", R.drawable.image20))
-        return imgList
     }
 
     companion object {
@@ -152,5 +124,13 @@ class BlankFragment2 : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onDataChanged() {
+        var itemList = mutableListOf<ContactData>()
+        itemList = MyApplication.prefs.getContact()
+        imageAdapter.updateData(itemList)
+        imageAdapter.notifyDataSetChanged()
+        Log.d("as","asdasda")
     }
 }

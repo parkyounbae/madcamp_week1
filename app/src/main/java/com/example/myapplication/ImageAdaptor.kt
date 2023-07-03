@@ -52,6 +52,10 @@ class ImageAdapter(private var context: Context?, private var imgList: MutableLi
         return imgList.size
     }
 
+    fun updateData(newData: MutableList<ContactData>) {
+        imgList = newData
+    }
+
     fun cropImageToSquare(imageView: ImageView) {
         val drawable = imageView.drawable
         if (drawable is BitmapDrawable) {

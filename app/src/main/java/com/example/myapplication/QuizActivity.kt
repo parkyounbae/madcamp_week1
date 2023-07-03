@@ -24,7 +24,7 @@ class QuizActivity : AppCompatActivity() {
     private var currentIndex = 0
     private var numberOfQuiz = 0
     private var correctNumber = 0
-    private lateinit var quizList: ArrayList<ImageData>
+    private lateinit var quizList: MutableList<ContactData>
     private lateinit var imageView: ImageView
     private lateinit var submitText: EditText
     private lateinit var currentResultTextView: TextView
@@ -40,7 +40,9 @@ class QuizActivity : AppCompatActivity() {
         // setContentView(R.layout.activity_quiz)
         setContentView(binding.root)
 
-        quizList = intent.getSerializableExtra("quizList") as ArrayList<ImageData>
+        quizList = MyApplication.prefs.getContact()
+
+
         numberOfQuiz = quizList.size
 
         imageView = findViewById(R.id.quizImageView)
@@ -95,7 +97,8 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun updateImageView() {
-        imageView.setImageResource(quizList.get(currentIndex).resId)
+        val resourceId = resources.getIdentifier("@drawable/"+quizList.get(currentIndex).imageResId, "drawable", "com.example.myapplication")
+        imageView.setImageResource(resourceId)
         cropImageToSquare(imageView)
         imageView.setBackgroundResource(R.drawable.image_corner)
         imageView.clipToOutline = true
