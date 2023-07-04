@@ -14,10 +14,11 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.compose.ui.res.integerArrayResource
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.databinding.FragmentBlank1Binding
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.json.JSONArray
 import org.json.JSONException
 import java.io.IOException
@@ -37,6 +38,8 @@ private const val ARG_PARAM2 = "param2"
 class BlankFragment1 : Fragment() {
     val binding by lazy { FragmentBlank1Binding.inflate(layoutInflater) }
     var contact_DataArray = mutableListOf<ContactData>()
+    private lateinit var floatingbutton: FloatingActionButton
+
     private lateinit var dataManager: DataManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -85,6 +88,16 @@ class BlankFragment1 : Fragment() {
             }
         })
 
+//        val fab_view = inflater.inflate(R.layout.fragment_blank1, container, false)
+//        floatingbutton = fab_view.findViewById(R.id.floating_button)
+        binding.floatingButton.setOnClickListener {
+            val intent = Intent(context, EditActivity::class.java)
+            intent.putExtra("value", 1)
+            intent.putExtra("contacts", "name")
+            startActivity(intent)
+        }
+
+
         adapter.setItemClickListener(object: ContactAdapter.OnItemClickListener{
             override fun onClick(v: View, contactData: ContactData) {
                 val view = layoutInflater.inflate(R.layout.contact_dialog, null)
@@ -98,6 +111,8 @@ class BlankFragment1 : Fragment() {
                 val detailEmail = view.findViewById<TextView>(R.id.detailContactEmail)
                 val detailInstagram = view.findViewById<TextView>(R.id.detailContactInstagram)
                 val detailClose = view.findViewById<Button>(R.id.detailContactClose)
+                val detailRemove = view.findViewById<Button>(R.id.contactRemove)
+                val detailEdit = view.findViewById<Button>(R.id.editButton)
 
                 detailName.text = contactData.name
 
@@ -109,12 +124,24 @@ class BlankFragment1 : Fragment() {
                 detailEmail.text = contactData.email
                 detailInstagram.text = contactData.instagram
 
-                detailClose.setOnClickListener {
+                //연락처 삭제 코드
+                detailRemove.setOnClickListener {
                     contact_DataArray.removeAt(contact_DataArray.indexOf(contactData))
                     MyApplication.prefs.setContact(contact_DataArray)
                     adapter.notifyDataSetChanged()
                     dataManager.setData("new")
                     detailContactDialog.dismiss()
+                }
+
+                detailClose.setOnClickListener {
+                    detailContactDialog.dismiss()
+                }
+
+                detailEdit.setOnClickListener {
+                    val intent = Intent(context, EditActivity::class.java)
+                    intent.putExtra("value", 2)
+                    intent.putExtra("contacts", contactData.name)
+                    startActivity(intent)
                 }
 
 
