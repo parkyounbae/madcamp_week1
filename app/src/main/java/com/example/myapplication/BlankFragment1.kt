@@ -3,6 +3,7 @@ package com.example.myapplication
 import android.app.AlertDialog
 import android.content.ContentResolver
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
@@ -15,7 +16,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.compose.ui.res.integerArrayResource
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.databinding.FragmentBlank1Binding
@@ -73,6 +73,10 @@ class BlankFragment1 : Fragment() {
         binding.rvBoard.adapter = adapter
         binding.rvBoard.layoutManager = LinearLayoutManager(context)
 
+        //divider 구분선 추가
+        val itemDecoration = PhDivider(1f, Color.GRAY)
+        binding.rvBoard.addItemDecoration(itemDecoration)
+
 
         var searchButton = binding.contactSearchEditText
 
@@ -127,11 +131,30 @@ class BlankFragment1 : Fragment() {
 
                 //연락처 삭제 코드
                 detailRemove.setOnClickListener {
-                    contact_DataArray.removeAt(contact_DataArray.indexOf(contactData))
-                    MyApplication.prefs.setContact(contact_DataArray)
-                    adapter.notifyDataSetChanged()
-                    dataManager.setData("new")
-                    detailContactDialog.dismiss()
+                    val dialog = AlertDialog.Builder(context)
+//                        .setTitle("연락처를 삭제하시겠습니까?")
+                        .setMessage("연락처를 삭제하시겠습니까?")
+                        .setPositiveButton("확인") { _, _ ->
+                            contact_DataArray.removeAt(contact_DataArray.indexOf(contactData))
+                            MyApplication.prefs.setContact(contact_DataArray)
+                            adapter.notifyDataSetChanged()
+                            dataManager.setData("new")
+                            detailContactDialog.dismiss()
+                            val intent = Intent(context, NaviActivity::class.java)
+                            startActivity(intent)
+                        }
+                        .setNegativeButton("취소") { dialog , _ ->
+                            dialog.dismiss()
+                        }
+                        .create()
+
+                    dialog.show()
+
+//                    contact_DataArray.removeAt(contact_DataArray.indexOf(contactData))
+//                    MyApplication.prefs.setContact(contact_DataArray)
+//                    adapter.notifyDataSetChanged()
+//                    dataManager.setData("new")
+//                    detailContactDialog.dismiss()
                 }
 
                 detailClose.setOnClickListener {
