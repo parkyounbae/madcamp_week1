@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- divider.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#000000" /> <!-- 구분선 색상 -->
+    <size android:height="3dp" /> <!-- 구분선 높이 -->
+</shape>
