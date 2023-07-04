@@ -110,7 +110,6 @@ class BlankFragment1 : Fragment() {
                 val view = layoutInflater.inflate(R.layout.contact_dialog, null)
                 val detailContactDialog = AlertDialog.Builder(context, R.style.CustomAlertDialog).setView(view).create()
 
-
                 val detailName = view.findViewById<TextView>(R.id.detailContactName)
                 val detailImage = view.findViewById<ImageView>(R.id.detailContactImageView)
                 val detailNumber = view.findViewById<TextView>(R.id.detailContactNumber)

@@ -181,7 +181,8 @@ class EditActivity : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()){
         if(it.resultCode == RESULT_OK && it.data != null) {
             val uri = it.data!!.data
-            imageUri = uri.toString()
+            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
+            imageUri = saveImageToInternalStorage(bitmap).toString()
             Glide.with(this)
                 .load(uri)
                 .circleCrop()
@@ -194,7 +195,6 @@ class EditActivity : AppCompatActivity() {
         if(it.resultCode == RESULT_OK && it.data != null) {
             val imageBitmap = it.data?.extras?.get("data") as Bitmap
             Glide.with(this).load(imageBitmap).circleCrop().into(profileimageView)
-//            profileimageView.setImageBitmap(imageBitmap)
             val uri = saveImageToInternalStorage(imageBitmap)
             imageUri = uri.toString()
             Log.d("Asd",imageUri)
