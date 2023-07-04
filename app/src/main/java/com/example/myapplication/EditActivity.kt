@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.provider.MediaStore
 import android.util.Log
@@ -23,10 +24,13 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material3.Text
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import com.bumptech.glide.Glide
 import com.example.myapplication.databinding.ActivityEditBinding
 import com.example.myapplication.databinding.ActivityResultBinding
 import com.example.myapplication.databinding.FragmentBlank3Binding
+import com.squareup.picasso.Picasso
+import de.hdodenhof.circleimageview.CircleImageView
 import nl.dionsegijn.konfetti.core.Angle
 import nl.dionsegijn.konfetti.core.Party
 import nl.dionsegijn.konfetti.core.Position
@@ -67,8 +71,8 @@ class EditActivity : AppCompatActivity() {
         val index = itemList.indexOfFirst { it.name == name }
 
         if(isEdit == 2){
-            // val resourceId = resources.getIdentifier("@drawable/"+itemList.get(index).imageResId, "drawable", "com.example.myapplication")
-            profileimageView.setImageURI(Uri.parse(itemList.get(index).imageResId))
+            // profileimageView.setImageURI(Uri.parse(itemList.get(index).imageResId))
+            Glide.with(this).load(Uri.parse(itemList.get(index).imageResId)).circleCrop().into(profileimageView)
             imageUri = itemList.get(index).imageResId
             nametextView.setText(itemList.get(index).name)
             phonetextView.setText(itemList.get(index).number)
