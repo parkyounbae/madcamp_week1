@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars"
+        android:src="@drawable/baseline_person_outline_24"
         android:background="@drawable/profile_roundimage"/>
 
     <ImageView
@@ -32,9 +32,9 @@
         android:layout_gravity="center"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/editName"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/baseline_person_outline_24" />
+        app:layout_constraintEnd_toStartOf="@+id/editName"
+        app:layout_constraintTop_toBottomOf="@+id/profileImage"
+        android:src="@drawable/baseline_person_outline_24" />
 
     <EditText
         android:id="@+id/editName"
@@ -46,9 +46,9 @@
         android:textColorHint="@color/black"
         android:hint="이름"
         android:paddingStart="10dp"
-        app:layout_constraintStart_toEndOf="@id/personIcon"
+        app:layout_constraintStart_toEndOf="@+id/personIcon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileImage"
         android:layout_marginTop="20dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"

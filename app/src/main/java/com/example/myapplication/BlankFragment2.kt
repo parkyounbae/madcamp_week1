@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -68,16 +69,14 @@ class BlankFragment2 : Fragment(), DataObserver {
             customDialog.setTitle(itemList.get(position).name)
 
             val image = customDialog.findViewById<ImageView>(R.id.imagePopup)
-            val resourceId = resources.getIdentifier("@drawable/"+itemList.get(position).imageResId, "drawable", "com.example.myapplication")
-            image.setImageResource(resourceId)
+            // val resourceId = resources.getIdentifier("@drawable/"+itemList.get(position).imageResId, "drawable", "com.example.myapplication")
+            image.setImageURI(Uri.parse(itemList.get(position).imageResId))
             cropImageToSquare(image)
             val button = customDialog.findViewById<Button>(R.id.closeButton)
             button.setOnClickListener{
                 customDialog.dismiss()
             }
             customDialog.show()
-
-
         }
 
 
