@@ -62,7 +62,7 @@
                 android:textSize="20sp"
                 android:paddingVertical="7dp"
                 android:textColor="@color/black"
-                android:background="@drawable/white_button"
+                android:background="@drawable/ripple_effect_app"
                 android:drawableStart="@drawable/baseline_phone_24"
                 android:paddingLeft="15dp"
                 android:paddingRight="30dp"
@@ -77,7 +77,7 @@
                 android:gravity="center"
                 android:textSize="20sp"
                 android:textColor="@color/black"
-                android:background="@drawable/white_button"
+                android:background="@drawable/ripple_effect_app"
                 android:paddingVertical="7dp"
                 android:drawableStart="@drawable/baseline_mail_outline_24"
                 android:paddingLeft="15dp"
@@ -95,7 +95,7 @@
                 android:textSize="20sp"
                 android:textColor="@color/black"
                 android:paddingVertical="7dp"
-                android:background="@drawable/white_button"
+                android:background="@drawable/ripple_effect_app"
                 android:drawableStart="@drawable/baseline_people_outline_24"
                 android:paddingLeft="15dp"
                 android:paddingRight="30dp"
@@ -153,8 +153,5 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
     </Button>
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
