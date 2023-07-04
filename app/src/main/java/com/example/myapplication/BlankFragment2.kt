@@ -63,7 +63,7 @@ class BlankFragment2 : Fragment(), DataObserver {
             val title = itemList.get(position).name
             val customDialog = CustomDialog(requireContext(), title)
 
-            val builder = AlertDialog.Builder(context).setView(view).create()
+            //val builder = AlertDialog.Builder(context).setView(view).create()
 //            builder가 팝업되는 화면임
 
             customDialog.setTitle(itemList.get(position).name)

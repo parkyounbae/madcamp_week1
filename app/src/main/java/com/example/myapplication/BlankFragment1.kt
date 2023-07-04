@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -107,118 +108,10 @@ class BlankFragment1 : Fragment() {
         adapter.setItemClickListener(object: ContactAdapter.OnItemClickListener{
             @SuppressLint("ResourceAsColor")
             override fun onClick(v: View, contactData: ContactData) {
-                val view = layoutInflater.inflate(R.layout.contact_dialog, null)
-                val detailContactDialog = AlertDialog.Builder(context, R.style.CustomAlertDialog).setView(view).create()
-
-                val detailName = view.findViewById<TextView>(R.id.detailContactName)
-                val detailImage = view.findViewById<ImageView>(R.id.detailContactImageView)
-                val detailNumber = view.findViewById<TextView>(R.id.detailContactNumber)
-
-                val detailEmail = view.findViewById<TextView>(R.id.detailContactEmail)
-                val detailInstagram = view.findViewById<TextView>(R.id.detailContactInstagram)
-                val detailClose = view.findViewById<Button>(R.id.detailContactClose)
-                val detailRemove = view.findViewById<Button>(R.id.contactRemove)
-                val detailEdit = view.findViewById<Button>(R.id.editButton)
-
-                detailName.text = contactData.name
-
-                // 이미지의 리소스 식별자를 가져오기
-                // val resourceId = resources.getIdentifier("@drawable/"+contactData.imageResId, "drawable", "com.example.myapplication")
-
-                detailImage.setImageURI(Uri.parse(contactData.imageResId))
-                detailNumber.text = contactData.number
-                if(contactData.email == "") {
-                    detailEmail.text = "Email"
-                    detailEmail.setTextColor(R.color.gray)
-                } else {
-                    detailEmail.text = contactData.email
-                }
-
-                if(contactData.instagram == "") {
-                    detailInstagram.text = "Instagram"
-                    detailInstagram.setTextColor(R.color.gray)
-                } else {
-                    detailInstagram.text = contactData.instagram
-                }
-
-                //연락처 삭제 코드
-                detailRemove.setOnClickListener {
-                    val dialog = AlertDialog.Builder(context)
-//                        .setTitle("연락처를 삭제하시겠습니까?")
-                        .setMessage("연락처를 삭제하시겠습니까?")
-                        .setPositiveButton("확인") { _, _ ->
-                            contact_DataArray.removeAt(contact_DataArray.indexOf(contactData))
-                            MyApplication.prefs.setContact(contact_DataArray)
-                            adapter.notifyDataSetChanged()
-                            dataManager.setData("new")
-                            detailContactDialog.dismiss()
-                            val intent = Intent(context, NaviActivity::class.java)
-                            startActivity(intent)
-                        }
-                        .setNegativeButton("취소") { dialog , _ ->
-                            dialog.dismiss()
-                        }
-                        .create()
-
-                    dialog.show()
-
-//                    contact_DataArray.removeAt(contact_DataArray.indexOf(contactData))
-//                    MyApplication.prefs.setContact(contact_DataArray)
-//                    adapter.notifyDataSetChanged()
-//                    dataManager.setData("new")
-//                    detailContactDialog.dismiss()
-                }
-
-                detailClose.setOnClickListener {
-                    detailContactDialog.dismiss()
-                }
-
-                detailEdit.setOnClickListener {
-                    val intent = Intent(context, EditActivity::class.java)
-                    intent.putExtra("value", 2)
-                    intent.putExtra("contacts", contactData.name)
-                    startActivity(intent)
-                }
-
-
-
-                detailNumber.setOnClickListener {
-                    var intent = Intent(Intent.ACTION_DIAL)
-                    var realNumber = "tel:"
-                    var tempNumber = contactData.number.split("-")
-                    realNumber = realNumber + tempNumber.get(0)
-                    realNumber = realNumber + tempNumber.get(1)
-                    realNumber = realNumber + tempNumber.get(2)
-
-                    Log.d("number", realNumber)
-                    intent.data = Uri.parse(realNumber)
-                    startActivity(intent)
-                }
-
-                detailInstagram.setOnClickListener {
-                    val intent = Intent(Intent.ACTION_VIEW)
-                    val insta = contactData.instagram
-                    val url = "https://www.instagram.com/$insta"
-                    intent.data = Uri.parse(url)
-                    startActivity(intent)
-                }
-
-                detailEmail.setOnClickListener {
-                    val emailIntent = Intent(Intent.ACTION_SENDTO)
-                    emailIntent.data = Uri.parse("mailto:${contactData.email}")
-
-                    try {
-                        startActivity(emailIntent)
-                    } catch (e: Exception) {
-                        Toast.makeText(context, "Failed to open email client", Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-
-
-                detailContactDialog.show()
-                detailContactDialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-
+                val intent = Intent(context, ContactActivity::class.java)
+                intent.putExtra("name", contactData.name)
+                Log.d("frag1 name", contactData.name)
+                startActivity(intent)
             }
         })
 
