@@ -82,7 +82,8 @@
                 android:drawableStart="@drawable/baseline_mail_outline_24"
                 android:paddingLeft="15dp"
                 android:paddingRight="30dp"
-                android:layout_margin="10dp">
+                android:layout_margin="10dp"
+                android:hint="Email">
             </TextView>
 
             <TextView

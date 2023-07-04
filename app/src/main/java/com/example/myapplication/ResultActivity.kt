@@ -71,13 +71,13 @@ class ResultActivity : AppCompatActivity() {
 
     fun showResultMessage(score: Int, total: Int) {
         if (score >= 0.75 * total) {
-            MessageText.text = "축하합니다!"
+            MessageText.text = "\uD83D\uDE1A\uD83D\uDE1D\uD83E\uDD73 축하합니다! \uD83D\uDE0D\uD83E\uDD70\uD83D\uDE04"
         } else if (score >= 0.5 * total) {
-            MessageText.text = "잘 하셨습니다! 좋은 성적입니다."
+            MessageText.text = "좀 치네? 조금 더 노력해줘 \uD83E\uDD79"
         } else if (score >= 0.25 * total) {
-            MessageText.text = "노력이 보이는 성적입니다. 계속 열심히 하세요."
+            MessageText.text = "흠.. 좀 아쉽네 ^^ \uD83E\uDD14"
         } else {
-            MessageText.text = "분발하세요! 더 많은 노력이 필요합니다."
+            MessageText.text = "넌 집 가라 ㅉㅉ \uD83D\uDE21"
         }
         val party = Party(
             speed = 30f,

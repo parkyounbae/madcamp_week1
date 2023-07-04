@@ -7,6 +7,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -83,18 +84,23 @@ class QuizActivity : AppCompatActivity() {
         correctNumber++
         if(currentIndex == numberOfQuiz ) {
             endQuiz()
+        } else {
+            updateCorrectText()
+            updateImageView()
         }
-        updateCorrectText()
-        updateImageView()
+
     }
 
     private fun wrong() {
         Toast.makeText(this, "틀렸습니다. 이분은 " + quizList.get(currentIndex).name + " 님입니다. 사과하세요",Toast.LENGTH_SHORT).show()
         currentIndex++
+        Log.d("currentIndex", currentIndex.toString())
         if(currentIndex  == numberOfQuiz) {
+            Log.d("endQuiz", numberOfQuiz.toString())
             endQuiz()
+        } else {
+            updateImageView()
         }
-        updateImageView()
     }
 
     private fun updateImageView() {

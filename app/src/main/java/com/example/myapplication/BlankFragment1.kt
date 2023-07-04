@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.ContentResolver
 import android.content.Intent
@@ -104,6 +105,7 @@ class BlankFragment1 : Fragment() {
 
 
         adapter.setItemClickListener(object: ContactAdapter.OnItemClickListener{
+            @SuppressLint("ResourceAsColor")
             override fun onClick(v: View, contactData: ContactData) {
                 val view = layoutInflater.inflate(R.layout.contact_dialog, null)
                 val detailContactDialog = AlertDialog.Builder(context, R.style.CustomAlertDialog).setView(view).create()
@@ -126,8 +128,19 @@ class BlankFragment1 : Fragment() {
 
                 detailImage.setImageURI(Uri.parse(contactData.imageResId))
                 detailNumber.text = contactData.number
-                detailEmail.text = contactData.email
-                detailInstagram.text = contactData.instagram
+                if(contactData.email == "") {
+                    detailEmail.text = "Email"
+                    detailEmail.setTextColor(R.color.gray)
+                } else {
+                    detailEmail.text = contactData.email
+                }
+
+                if(contactData.instagram == "") {
+                    detailInstagram.text = "Instagram"
+                    detailInstagram.setTextColor(R.color.gray)
+                } else {
+                    detailInstagram.text = contactData.instagram
+                }
 
                 //연락처 삭제 코드
                 detailRemove.setOnClickListener {

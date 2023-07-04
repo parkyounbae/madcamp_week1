@@ -2,58 +2,43 @@ package com.example.myapplication
 
 import android.content.Context
 import android.content.ContextWrapper
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Bundle
 import android.provider.MediaStore
+import android.telephony.PhoneNumberFormattingTextWatcher
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.PopupMenu
-import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.material3.Text
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.myapplication.databinding.ActivityEditBinding
-import com.example.myapplication.databinding.ActivityResultBinding
-import com.example.myapplication.databinding.FragmentBlank3Binding
-import com.squareup.picasso.Picasso
-import de.hdodenhof.circleimageview.CircleImageView
-import nl.dionsegijn.konfetti.core.Angle
-import nl.dionsegijn.konfetti.core.Party
-import nl.dionsegijn.konfetti.core.Position
-import nl.dionsegijn.konfetti.core.Rotation
-import nl.dionsegijn.konfetti.core.emitter.Emitter
-import nl.dionsegijn.konfetti.core.models.Size
-import nl.dionsegijn.konfetti.xml.KonfettiView
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.util.Locale
-import java.util.concurrent.TimeUnit
+
 
 class EditActivity : AppCompatActivity() {
     val binding by lazy { ActivityEditBinding.inflate(layoutInflater)}
 
     private lateinit var dataManager: DataManager
     private lateinit var profileimageView: ImageView
+
     var imageUri = "@drawable/"+ R.drawable.baseline_person_outline_24
+    private var itemList = mutableListOf <ContactData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        val resourceId = resources.getIdentifier(R.drawable.baseline_person_outline_24.toString(), "drawable", "com.example.myapplication")
+        imageUri = "android.resource://${this.packageName}/$resourceId"
 
         profileimageView = binding.profileImage
         val nametextView = binding.editName
@@ -63,7 +48,10 @@ class EditActivity : AppCompatActivity() {
         val doneButton = binding.contactdoneButton
         val cancelButton = binding.contactcancelButton
 
-        var itemList = mutableListOf<ContactData>()
+        var canDoneName = false
+        var canDonePhone = false
+
+
         itemList = MyApplication.prefs.getContact()
 
         var isEdit = intent.getSerializableExtra("value") as Int
@@ -78,6 +66,13 @@ class EditActivity : AppCompatActivity() {
             phonetextView.setText(itemList.get(index).number)
             emailtextView.setText(itemList.get(index).email)
             instatextView.setText(itemList.get(index).instagram)
+            canDoneName = true
+            canDonePhone = true
+        } else {
+            Glide.with(this).load(Uri.parse(imageUri)).circleCrop().into(profileimageView)
+            canDoneName = false
+            canDonePhone = false
+            doneButton.isEnabled = false
         }
 
         profileimageView.setOnClickListener {
@@ -85,10 +80,59 @@ class EditActivity : AppCompatActivity() {
             showPopup(profileimageView)
         }
 
+        phonetextView.addTextChangedListener(PhoneNumberFormattingTextWatcher())
+        phonetextView.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+                //텍스트 변화가 시작될때
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                //텍스트에 변화가 있을때
+                if(countMatches(s.toString(),"-") < 2){
+                    canDonePhone = false
+                } else {
+                    canDonePhone = true
+                }
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                //텍스트 변화가 끝났을떄
+                if(canDoneName&&canDonePhone) {
+                    doneButton.isEnabled = true
+                } else {
+                    doneButton.isEnabled = false
+                }
+            }
+        })
+
+        nametextView.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+                //텍스트 변화가 시작될때
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                //텍스트에 변화가 있을때
+                if(s.toString() != "") {
+                    canDoneName = true
+                } else {
+                    canDoneName = false
+                }
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                //텍스트 변화가 끝났을떄
+                if(canDoneName&&canDonePhone) {
+                    doneButton.isEnabled = true
+                } else {
+                    doneButton.isEnabled = false
+                }
+            }
+        })
+
         doneButton.setOnClickListener{
             val typedName = nametextView.text
             val typedPhone = phonetextView.text
-            val typedEmail = emailtextView.text
+            var typedEmail = emailtextView.text
             val typedInsta = instatextView.text
 
 
@@ -140,6 +184,7 @@ class EditActivity : AppCompatActivity() {
             imageUri = uri.toString()
             Glide.with(this)
                 .load(uri)
+                .circleCrop()
                 .into(profileimageView)
         }
     }
@@ -148,17 +193,21 @@ class EditActivity : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()){
         if(it.resultCode == RESULT_OK && it.data != null) {
             val imageBitmap = it.data?.extras?.get("data") as Bitmap
-            profileimageView.setImageBitmap(imageBitmap)
+            Glide.with(this).load(imageBitmap).circleCrop().into(profileimageView)
+//            profileimageView.setImageBitmap(imageBitmap)
             val uri = saveImageToInternalStorage(imageBitmap)
             imageUri = uri.toString()
-            Log.d("Asd","camera")
+            Log.d("Asd",imageUri)
         }
     }
 
     private fun saveImageToInternalStorage(bitmap: Bitmap): Uri? {
         val wrapper = ContextWrapper(applicationContext)
+        val long_now = System.currentTimeMillis()
+        val imageName = "image"+long_now.toString()+".jpg"
+        Log.d("imagename", imageName)
         var file = wrapper.getDir("images", Context.MODE_PRIVATE)
-        file = File(file, "image.jpg")
+        file = File(file, imageName)
 
         try {
             val stream = FileOutputStream(file)
@@ -184,6 +233,21 @@ class EditActivity : AppCompatActivity() {
         Log.d("Asd","camera2")
 
         activityResult2.launch(intent)
+    }
+
+    fun countMatches(text: String, search: String): Int {
+        var count = 0
+        var index = 0
+
+        while (index != -1) {
+            index = text.indexOf(search, index)
+            if (index != -1) {
+                count++
+                index += search.length
+            }
+        }
+
+        return count
     }
 
 
