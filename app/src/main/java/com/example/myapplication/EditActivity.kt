@@ -1,16 +1,22 @@
 package com.example.myapplication
 
+import android.content.Context
+import android.content.ContextWrapper
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -28,6 +34,9 @@ import nl.dionsegijn.konfetti.core.Rotation
 import nl.dionsegijn.konfetti.core.emitter.Emitter
 import nl.dionsegijn.konfetti.core.models.Size
 import nl.dionsegijn.konfetti.xml.KonfettiView
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 
@@ -68,9 +77,8 @@ class EditActivity : AppCompatActivity() {
         }
 
         profileimageView.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.type = "image/*"
-            activityResult.launch(intent)
+            Log.d("click", "camera")
+            showPopup(profileimageView)
         }
 
         doneButton.setOnClickListener{
@@ -90,10 +98,6 @@ class EditActivity : AppCompatActivity() {
                 // 수정된 연락처 저장
                 MyApplication.prefs.setContact(itemList)
 
-//            val newContact = ContactData(typedName.toString(), typedPhone.toString(), "image1", typedEmail.toString(), typedInsta.toString())
-//            val contact_list = MyApplication.prefs.getContact()
-//            contact_list.add(newContact)
-//            MyApplication.prefs.setContact(contact_list)
             }
             else{
                 val newContact = ContactData(typedName.toString(), typedPhone.toString(), imageUri, typedEmail.toString(), typedInsta.toString())
@@ -112,6 +116,19 @@ class EditActivity : AppCompatActivity() {
 
     }
 
+    private fun showPopup(v: View) {
+        val popup = PopupMenu(this, v) // PopupMenu 객체 선언
+        popup.menuInflater.inflate(R.menu.profile_menu, popup.menu) // 메뉴 레이아웃 inflate
+        popup.setOnMenuItemClickListener{item->
+            when(item.itemId) {
+                R.id.action_menu1 -> clickGallery()
+                R.id.action_menu2 -> clickCamera()
+            }
+            true
+        }
+        popup.show() // 팝업 보여주기
+    }
+
     private val activityResult: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()){
         if(it.resultCode == RESULT_OK && it.data != null) {
@@ -121,6 +138,48 @@ class EditActivity : AppCompatActivity() {
                 .load(uri)
                 .into(profileimageView)
         }
+    }
+
+    private val activityResult2: ActivityResultLauncher<Intent> = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()){
+        if(it.resultCode == RESULT_OK && it.data != null) {
+            val imageBitmap = it.data?.extras?.get("data") as Bitmap
+            profileimageView.setImageBitmap(imageBitmap)
+            val uri = saveImageToInternalStorage(imageBitmap)
+            imageUri = uri.toString()
+            Log.d("Asd","camera")
+        }
+    }
+
+    private fun saveImageToInternalStorage(bitmap: Bitmap): Uri? {
+        val wrapper = ContextWrapper(applicationContext)
+        var file = wrapper.getDir("images", Context.MODE_PRIVATE)
+        file = File(file, "image.jpg")
+
+        try {
+            val stream = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+            stream.flush()
+            stream.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+        return Uri.fromFile(file)
+    }
+
+    private fun clickGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        Log.d("Asd","camera1")
+        intent.type = "image/*"
+        activityResult.launch(intent)
+    }
+
+    private fun clickCamera() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        Log.d("Asd","camera2")
+
+        activityResult2.launch(intent)
     }
 
 
