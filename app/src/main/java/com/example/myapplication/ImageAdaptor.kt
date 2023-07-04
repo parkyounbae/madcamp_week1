@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -30,8 +31,8 @@ class ImageAdapter(private var context: Context?, private var imgList: MutableLi
         }
 
         val itemData = imgList[position]
-        val resourceId = context!!.resources.getIdentifier("@drawable/"+imgList.get(position).imageResId, "drawable", "com.example.myapplication")
-        holder.imageView.setImageResource(resourceId)
+        // val resourceId = context!!.resources.getIdentifier("@drawable/"+imgList.get(position).imageResId, "drawable", "com.example.myapplication")
+        holder.imageView.setImageURI(Uri.parse(imgList.get(position).imageResId))
         cropImageToSquare(holder.imageView)
         holder.textView.text = itemData.name
         holder.imageView.setBackgroundResource(R.drawable.image_corner)

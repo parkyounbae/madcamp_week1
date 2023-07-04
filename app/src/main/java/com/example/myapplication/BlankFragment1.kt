@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.app.AlertDialog
+import android.content.ContentResolver
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -117,9 +118,9 @@ class BlankFragment1 : Fragment() {
                 detailName.text = contactData.name
 
                 // 이미지의 리소스 식별자를 가져오기
-                val resourceId = resources.getIdentifier("@drawable/"+contactData.imageResId, "drawable", "com.example.myapplication")
+                // val resourceId = resources.getIdentifier("@drawable/"+contactData.imageResId, "drawable", "com.example.myapplication")
 
-                detailImage.setImageResource(resourceId)
+                detailImage.setImageURI(Uri.parse(contactData.imageResId))
                 detailNumber.text = contactData.number
                 detailEmail.text = contactData.email
                 detailInstagram.text = contactData.instagram
@@ -202,7 +203,10 @@ class BlankFragment1 : Fragment() {
                 val jsonObject = jsonArray.getJSONObject(i)
                 val name = jsonObject.getString("name")
                 val number = jsonObject.getString("number")
-                val imageRedId = jsonObject.getString("image")
+                val imageName = jsonObject.getString("image")
+                val resourceId = resources.getIdentifier("@drawable/"+imageName, "drawable", "com.example.myapplication")
+                val uri = "android.resource://${requireContext().packageName}/$resourceId"
+                val imageRedId = uri
                 val email = jsonObject.getString("email")
                 val instagram = jsonObject.getString("instagram")
                 val dataItem = ContactData(name, number, imageRedId, email, instagram)

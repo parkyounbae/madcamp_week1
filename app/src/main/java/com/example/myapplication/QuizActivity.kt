@@ -3,6 +3,7 @@ package com.example.myapplication
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -97,8 +98,8 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun updateImageView() {
-        val resourceId = resources.getIdentifier("@drawable/"+quizList.get(currentIndex).imageResId, "drawable", "com.example.myapplication")
-        imageView.setImageResource(resourceId)
+        // val resourceId = resources.getIdentifier("@drawable/"+quizList.get(currentIndex).imageResId, "drawable", "com.example.myapplication")
+        imageView.setImageURI(Uri.parse(quizList.get(currentIndex).imageResId))
         cropImageToSquare(imageView)
         imageView.setBackgroundResource(R.drawable.image_corner)
         imageView.clipToOutline = true
