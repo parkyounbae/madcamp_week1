@@ -50,7 +50,7 @@ class QuizActivity : AppCompatActivity() {
         imageView = findViewById(R.id.quizImageView)
         submitText = findViewById(R.id.submitText)
         currentResultTextView = findViewById(R.id.currentResult)
-        currentResultTextView.text = correctNumber.toString() + "/" + numberOfQuiz.toString()
+        currentResultTextView.text = correctNumber.toString() + " / " + numberOfQuiz.toString()
         updateImageView()
 
         val submitButton = findViewById<Button>(R.id.submitButton)

@@ -42,6 +42,6 @@
         android:layout_marginTop="15dp"
         android:textSize="25sp"
         android:layout_gravity="center"
-        android:background="@drawable/button_pattern" />
+        android:background="@drawable/ok_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

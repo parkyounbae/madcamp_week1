@@ -55,7 +55,7 @@ class ResultActivity : AppCompatActivity() {
         showResultMessage(correctNumber, numberOfQuiz)
 
         val timeText = formatTime(totalTime)
-        TimeTextView.text = "걸린 시간\n\n" + timeText
+        TimeTextView.text = "걸린 시간: " + timeText
 
 //        val binding = ActivityResultBinding.inflate(layoutInflater)
 
