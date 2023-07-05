@@ -55,7 +55,7 @@ class ResultActivity : AppCompatActivity() {
         showResultMessage(correctNumber, numberOfQuiz)
 
         val timeText = formatTime(totalTime)
-        TimeTextView.text = "걸린 시간: " + timeText
+        TimeTextView.text = "걸린 시간\n" + timeText
 
 //        val binding = ActivityResultBinding.inflate(layoutInflater)
 
@@ -83,14 +83,14 @@ class ResultActivity : AppCompatActivity() {
             speed = 30f,
             maxSpeed = 50f,
             damping = 0.9f,
-            angle = Angle.TOP,
-            spread = 45,
+            angle = Angle.BOTTOM,
+            spread = 90,
             size = listOf(Size.SMALL, Size.LARGE),
             timeToLive = 3000L,
             rotation = Rotation(),
             colors = listOf(0xfce18a, 0xff726d, 0xf4306d, 0xb48def),
-            emitter = Emitter(duration = 100, TimeUnit.MILLISECONDS).max(30),
-            position = Position.Relative(0.5, 1.0)
+            emitter = Emitter(duration = 100, TimeUnit.MILLISECONDS).max(50),
+            position = Position.Relative(0.5, 0.0)
         )
         viewKonfetti.start(party)
     }
