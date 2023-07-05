@@ -13,13 +13,13 @@
         android:layout_height="0dp"
         android:scaleType="centerCrop"
         android:adjustViewBounds="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="15dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/stopwatch"
         tools:srcCompat="@tools:sample/avatars" />
 
     <Button
@@ -27,6 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:text="제출하기"
+        android:fontFamily="@font/cookierun_regular"
         android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/quizImageView"
@@ -35,7 +36,7 @@
         app:layout_constraintStart_toEndOf="@+id/submitText"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="30dp"
-        android:background="@drawable/button_pattern"
+        android:background="@drawable/ok_button"
         />
 
     <EditText
@@ -48,6 +49,7 @@
         android:textSize="17sp"
         android:textColorHint="@color/gray"
         android:hint="이름을 입력하시오."
+        android:fontFamily="@font/cookierun_regular"
         android:paddingStart="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quizImageView"
@@ -63,13 +65,15 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         android:gravity="center"
-        android:textSize="20pt"
+        android:textSize="25pt"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/cookierun_bold"
+        android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/quizImageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/stopwatch"
         />
 
     <TextView
@@ -77,14 +81,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:fontFamily="@font/cookierun_regular"
         android:gravity="center"
         android:textSize="20sp"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="15dp"
-        app:layout_constraintTop_toBottomOf="@+id/submitText"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@+id/currentResult"
         />
 
     <Button
@@ -92,6 +97,7 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:text="포기하기 ㅠㅠ"
+        android:fontFamily="@font/cookierun_regular"
         android:textStyle="bold"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
