@@ -1,14 +1,9 @@
 # Week 1 - 이름 쌓기
 
-<aside>
 💡 어플 다운로드 링크 : [https://drive.google.com/file/d/1l8UCuSh1TULLHtMRZvony6FabsSw0hh_/view?usp=sharing](https://drive.google.com/file/d/1l8UCuSh1TULLHtMRZvony6FabsSw0hh_/view?usp=sharing)
 
-</aside>
-
-<aside>
 💡 Github : [https://github.com/parkyounbae/madcamp_week1](https://github.com/parkyounbae/madcamp_week1)
 
-</aside>
 
 # Project : 이름 쌓기
 
@@ -27,11 +22,7 @@
     기본적으로 목록에는 사람들의 이름만 보이게 하였습니다. 미적 요소를 위해 이름 앞에 랜덤으로 색상이 지정되는 원형의 이미지를 배치하였습니다. 이때 사람의 연락처 목록을 클릭한다면 세부사항을 표시하는 페이지로 넘어가게 됩니다. 
     
 
-![Untitled](/readmePic/Untitled.png)
-
-![Screenshot_20230705_160717.png](/readmePic/Screenshot_20230705_160717.png)
-
-![Untitled](/readmePic/Untitled%201.png)
+<img src = "/readmePic/Untitled.png" width = "30%"> <img src = "/readmePic/Screenshot_20230705_160717.png" width = "30%"> <img src = "/readmePic/Untitled%201.png" width = "30%">
 
 1. 세부사항 페이지
     
@@ -39,45 +30,21 @@
     
      이때 번호를 클릭하게 되면 기본 다이얼 어플로 화면이 넘어가고 번호가 복사됩니다. 이메일을 클릭하면 기본 이메일 어플로 넘어가게 되고 받는사람의 탭에 이메일이 입력되게 됩니다. 마지막으로 인스타그램을 탭하면 인스타그램 어플로 화면이 넘어가게 되고 해당 프로필 페이지로 이동합니다. 
     
-
-![Untitled](/readmePic/Untitled%202.png)
-
-![Untitled](/readmePic/Untitled%203.png)
-
-![Screenshot_20230705-161442_Instagram.jpg](/readmePic/Screenshot_20230705-161442_Instagram.jpg)
+<img src = "/readmePic/Untitled%202.png" width = "30%"> <img src = "/readmePic/Untitled%203.png" width = "30%"> <img src = "/readmePic/Screenshot_20230705-161442_Instagram.jpg" width = "30%">
 
 1. 수정/삭제/추가
     
     상세 페이지에서는 해당 프로필의 수정이 가능합니다. 프로필 이미지는 카메라로 찍거나 갤러리에서 선택할 수 있고 그 외의 정보들도 수정 가능합니다. 이때 이름과 전화번호의 경우 올바르지 않은 형식이나 입력되지 않았다면 확인버튼을 누를수 없도록 하였습니다. 수정 이후에 리스트, 갤러리, 퀴즈 탭에 모두 반영되도록 하였습니다.  
     
-
-![기존의 프로필](/readmePic/Screenshot_20230705-161850.jpg)
-
-기존의 프로필
-
-![이름과 사진 수정](/readmePic/Screenshot_20230705-162130.jpg)
-
-이름과 사진 수정
-
-![수정된 사항이 반영됨](/readmePic/Screenshot_20230705-162152.jpg)
-
-수정된 사항이 반영됨
+<img src = "/readmePic/Screenshot_20230705-161850.jpg" width = "30%"> <img src = "/readmePic/Screenshot_20230705-162130.jpg" width = "30%"> <img src = "/readmePic/Screenshot_20230705-162152.jpg" width = "30%">
 
 상세페이지에서 삭제버튼을 누르면 확인 알림이 출력되고 확인 버튼을 누르면 해당 연락처가 삭제됩니다. 이 또한 모든 탭의 정보에 반영됩니다. 
 
-![Screenshot_20230705-162215.jpg](/readmePic/Screenshot_20230705-162215.jpg)
-
-![Screenshot_20230705-162219.jpg](/readmePic/Screenshot_20230705-162219.jpg)
+<img src = "/readmePic/Screenshot_20230705-162215.jpg" width = "30%"> <img src = "/readmePic/Screenshot_20230705-162219.jpg" width = "30%">
 
 마지막으로 메인 리스트에 있는 + 플로팅 버튼을 누르면 추가 회면으로 넘어가고 새롭게 연락처를 추가할 수 있습니다. 이 또한 모든 탭에 반영됩니다. 
 
-![Screenshot_20230705-163555.jpg](/readmePic/Screenshot_20230705-163555.jpg)
-
-![Screenshot_20230705-163602.jpg](/readmePic/Screenshot_20230705-163602.jpg)
-
-![Screenshot_20230705-163805.jpg](/readmePic/Screenshot_20230705-163805.jpg)
-
-![Screenshot_20230705-163815.jpg](/readmePic/Screenshot_20230705-163815.jpg)
+<img src = "/readmePic/Screenshot_20230705-163555.jpg" width = "20%"> <img src = "/readmePic/Screenshot_20230705-163602.jpg" width = "20%"> <img src = "/readmePic/Screenshot_20230705-163805.jpg" width = "20%"> <img src = "/readmePic/Screenshot_20230705-163815.jpg" width = "20%">
 
 ### Tab2: 갤러리
 
@@ -87,11 +54,7 @@ GridView를 통해 사람들의 사진을 볼 수 있고, 터치 시 저장한 �
 
 Tab 1 (연락처 탭)에서 연락처 정보나 이미지를 수정했을 시, 갤러리 탭에도 수정 사항이 반영됩니다.
 
-![KakaoTalk_Photo_2023-07-05-16-00-33 001.jpeg](/readmePic/KakaoTalk_Photo_2023-07-05-16-00-33_001.jpeg)
-
-![KakaoTalk_Photo_2023-07-05-16-10-02 001.jpeg](/readmePic/KakaoTalk_Photo_2023-07-05-16-10-02_001.jpeg)
-
-![KakaoTalk_Photo_2023-07-05-16-30-17.jpeg](/readmePic/KakaoTalk_Photo_2023-07-05-16-30-17.jpeg)
+<img src = "/readmePic/KakaoTalk_Photo_2023-07-05-16-00-33_001.jpeg" width = "30%"> <img src = "/readmePic/KakaoTalk_Photo_2023-07-05-16-10-02_001.jpeg" width = "30%"> <img src = "/readmePic/KakaoTalk_Photo_2023-07-05-16-30-17.jpeg" width = "30%">
 
 ### Tab3: 퀴즈
 
@@ -117,14 +80,5 @@ Tab 1 (연락처 탭)에서 연락처 정보나 이미지를 수정했을 시, �
     또한, 점수 구간에 따라, 화면 중앙에 각기 다른 메시지가 보여집니다.
     
     해당 화면에서 “종료하기” 버튼을 누르면 ResultActivity가 종료되며, NaviActivity로 이동합니다.
-    
 
-![KakaoTalk_Photo_2023-07-05-16-00-33 002.jpeg](/readmePicKakaoTalk_Photo_2023-07-05-16-00-33_002.jpeg)
-
-![KakaoTalk_Photo_2023-07-05-16-00-34 003.jpeg](/readmePic/KakaoTalk_Photo_2023-07-05-16-00-34_003.jpeg)
-
-![KakaoTalk_Photo_2023-07-05-16-10-03 002.jpeg](/readmePic/KakaoTalk_Photo_2023-07-05-16-10-03_002.jpeg)
-
-![KakaoTalk_Photo_2023-07-05-16-10-03 003.jpeg](/readmePic/KakaoTalk_Photo_2023-07-05-16-10-03_003.jpeg)
-
-![KakaoTalk_Photo_2023-07-05-16-09-57.jpeg](/readmePic/KakaoTalk_Photo_2023-07-05-16-09-57.jpeg)
+<img src = "/readmePic/KakaoTalk_Photo_2023-07-05-16-00-33_002.jpeg" width = "15%"> <img src = "/readmePic/KakaoTalk_Photo_2023-07-05-16-00-34_003.jpeg" width = "15%"> <img src = "/readmePic/KakaoTalk_Photo_2023-07-05-16-10-03_002.jpeg" width = "15%"> <img src = "/readmePic/KakaoTalk_Photo_2023-07-05-16-10-03_003.jpeg" width = "15%"> <img src = "/readmePic/KakaoTalk_Photo_2023-07-05-16-09-57.jpeg" width = "15%">
