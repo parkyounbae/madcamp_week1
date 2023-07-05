@@ -1,6 +1,10 @@
 package com.example.myapplication
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color.rgb
+import android.graphics.ColorSpace.Rgb
+import android.graphics.drawable.GradientDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +13,10 @@ import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
 import android.widget.Toast
+import androidx.compose.ui.graphics.Color
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.ContactItemBinding
+import java.util.Random
 import kotlin.coroutines.coroutineContext
 
 class ContactAdapter(val contactList: MutableList<ContactData>): RecyclerView.Adapter<Holder>(), Filterable {
@@ -81,8 +87,30 @@ class ContactAdapter(val contactList: MutableList<ContactData>): RecyclerView.Ad
 }
 
 class Holder(val binding: ContactItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    @SuppressLint("ResourceAsColor")
     fun setContact(contact: ContactData) {
-        binding.name.text = contact.name
-        binding.number.text = contact.number
+        val shapeDrawable = GradientDrawable()
+        shapeDrawable.shape = GradientDrawable.OVAL
+        shapeDrawable.setColor(getRandomColor()) // 배경 색상을 원하는 색상으로 변경합니다
+
+        val radius = binding.name.width / 2.toFloat()
+        shapeDrawable.cornerRadii = floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius)
+
+        binding.name.background = shapeDrawable
+        binding.name.text = contact.name.get(0).toString()
+        binding.number.text = contact.name
+    }
+
+    fun getRandomColor():Int{
+        var colors = ArrayList<Int>()
+        colors.add(rgb(242,166,139))
+        colors.add(rgb(136,193,187))
+        colors.add(rgb(156,165,237))
+        colors.add(rgb(143,199,246))
+        colors.add(rgb(204,216,133))
+        colors.add(rgb(143,199,246))
+
+        val random = Random()
+        return colors.get(random.nextInt(6))
     }
 }
