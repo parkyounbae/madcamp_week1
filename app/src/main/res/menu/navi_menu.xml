@@ -17,6 +17,6 @@
         android:id="@+id/BlankFragment3"
         android:title="퀴즈"
         android:textStyle="bold"
-        android:icon="@drawable/baseline_fiber_new_24"/>
+        android:icon="@drawable/baseline_quiz_24"/>
 
 </menu>
