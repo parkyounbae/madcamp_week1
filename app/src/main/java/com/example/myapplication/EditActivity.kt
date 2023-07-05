@@ -5,18 +5,23 @@ import android.content.ContextWrapper
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.telephony.PhoneNumberFormattingTextWatcher
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.ContextThemeWrapper
+import android.view.Gravity
+import android.view.MenuInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.PopupMenu
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.menu.MenuPopupHelper
 import com.bumptech.glide.Glide
 import com.example.myapplication.databinding.ActivityEditBinding
 import java.io.File
@@ -165,8 +170,16 @@ class EditActivity : AppCompatActivity() {
     }
 
     private fun showPopup(v: View) {
-        val popup = PopupMenu(this, v) // PopupMenu 객체 선언
+        val popupMenuStyle = R.style.PopupMenuStyle
+        val contextThemeWrapper = ContextThemeWrapper(this, popupMenuStyle)
+        val popup = PopupMenu(contextThemeWrapper, v, Gravity.END, 0, popupMenuStyle) // PopupMenu 객체 선언
         popup.menuInflater.inflate(R.menu.profile_menu, popup.menu) // 메뉴 레이아웃 inflate
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            popup.setForceShowIcon(true)
+        }
+
+
+
         popup.setOnMenuItemClickListener{item->
             when(item.itemId) {
                 R.id.action_menu1 -> clickGallery()
