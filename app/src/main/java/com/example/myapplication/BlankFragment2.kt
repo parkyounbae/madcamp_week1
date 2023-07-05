@@ -14,6 +14,7 @@ import android.view.WindowManager
 import android.widget.Button
 import android.widget.GridView
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 
 
@@ -46,6 +47,7 @@ class BlankFragment2 : Fragment(), DataObserver {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (activity as AppCompatActivity).supportActionBar?.title = "갤러리"
         var itemList = mutableListOf<ContactData>()
         itemList = MyApplication.prefs.getContact()
 

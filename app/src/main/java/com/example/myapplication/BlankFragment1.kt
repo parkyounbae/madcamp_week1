@@ -5,9 +5,11 @@ import android.app.AlertDialog
 import android.content.ContentResolver
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
+import android.text.Html
 import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,6 +20,9 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.ColorUtils
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.databinding.FragmentBlank1Binding
@@ -58,6 +63,17 @@ class BlankFragment1 : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // 상단바 텍스트 변경
+        (activity as AppCompatActivity).supportActionBar?.title = "연락처"
+
+        // 상단바 배경색 변경
+//        val color = ContextCompat.getColor(requireContext(), R.color.color1)
+//        (activity as AppCompatActivity).supportActionBar?.setBackgroundDrawable(ColorDrawable(color))
+//
+//        val textcolor = ContextCompat.getColor(requireContext(), R.color.black)
+//        val textColor = ColorUtils.setAlphaComponent(color, 255) // 투명도를 255로 설정
+//        (activity as AppCompatActivity).supportActionBar?.setTitle(Html.fromHtml("<font color='$textColor'>새로운 제목</font>"))
+
         val first = MyApplication.prefs.getBoolean("isFirst", false)
         if (first == false) {
             Log.d("Is first Time?", "first")

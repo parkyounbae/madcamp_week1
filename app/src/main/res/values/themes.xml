@@ -12,5 +12,5 @@
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:background">@color/white</item>
-    </style>
+    </style>ㅋ
 </resources>
