@@ -61,6 +61,7 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         android:fontFamily="@font/cookierun_regular"
+        android:lineSpacingExtra="10dp"
         android:gravity="center"
         android:textSize="20sp"
         android:textColor="@color/black"
